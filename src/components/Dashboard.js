@@ -17,9 +17,6 @@ export default function Dashboard({ code }) {
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
 
-  const val = spotifyApi.getMyCurrentPlayingTrack().then((resp) => {
-    console.log("resp: ", resp);
-  })
 
   function chooseTrack(track) {
     setPlayingTrack(track)
@@ -45,6 +42,9 @@ export default function Dashboard({ code }) {
   useEffect(() => {
     if (!accessToken) return
     spotifyApi.setAccessToken(accessToken)
+    const val = spotifyApi.getMyCurrentPlayingTrack().then((resp) => {
+      console.log("resp: ", resp);
+    })
   }, [accessToken])
 
   useEffect(() => {
