@@ -17,6 +17,10 @@ export default function Dashboard({ code }) {
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
 
+  const val = spotifyApi.getMyCurrentPlayingTrack().then((resp) => {
+    console.log("resp: ", resp);
+  })
+
   function chooseTrack(track) {
     setPlayingTrack(track)
     setSearch("")
@@ -50,6 +54,8 @@ export default function Dashboard({ code }) {
     let cancel = false
     spotifyApi.searchTracks(search).then(res => {
       if (cancel) return
+      console.log("res: ", res)
+      console.log("setting search results")
       setSearchResults(
         res.body.tracks.items.map(track => {
           const smallestAlbumImage = track.album.images.reduce(
