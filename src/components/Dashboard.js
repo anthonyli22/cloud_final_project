@@ -5,10 +5,14 @@ import TrackSearchResult from "./TrackSearchResult"
 import { Container, Form } from "react-bootstrap"
 import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios"
+import requests from "requests"
+import { Button } from "bootstrap"
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
 })
+
+var url = 'https://api.spotify.com/v1'
 
 export default function Dashboard({ code }) {
   const accessToken = useAuth(code)
@@ -42,15 +46,11 @@ export default function Dashboard({ code }) {
   useEffect(() => {
     if (!accessToken) return
     spotifyApi.setAccessToken(accessToken)
-    const val = spotifyApi.getMyCurrentPlayingTrack().then((resp) => {
-      console.log("resp: ", resp);
-    })
   }, [accessToken])
 
   useEffect(() => {
     if (!search) return setSearchResults([])
     if (!accessToken) return
-
     let cancel = false
     spotifyApi.searchTracks(search).then(res => {
       if (cancel) return
@@ -79,8 +79,30 @@ export default function Dashboard({ code }) {
     return () => (cancel = true)
   }, [search, accessToken])
 
+  const onSubmitRun = async (e) => {
+    e.preventDefault()
+    if(!accessToken) return
+    var head = "Bearer " + accessToken
+    console.log("accesstoken: ", accessToken)
+    let config = {
+      headers: {
+        "Authorization": head,
+        'Content-Type': 'application/json'
+      }
+    }
+    
+    const val = await axios.get("https://api.spotify.com/v1/me/playlists", config
+    ).then((resp) => {
+      console.log("resp1: ", resp)
+    })
+    .catch((e) => {
+      console.log("error: ", e)
+    })
+  }
+
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
+      <button style={{"height": '50px'}} onClick={onSubmitRun}> </button>
       <Form.Control
         type="search"
         placeholder="Search Songs/Artists"
