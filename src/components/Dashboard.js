@@ -17,10 +17,11 @@ var url = 'https://api.spotify.com/v1'
 export default function Dashboard({ code }) {
   const accessToken = useAuth(code)
   const [search, setSearch] = useState("")
-  const [searchResults, setSearchResults] = useState([])
+  // const [searchResults, setSearchResults] = useState([])
   const [playingTrack, setPlayingTrack] = useState()
   const [lyrics, setLyrics] = useState("")
-
+  const [playlists, setPlaylists] = useState([])
+  const [selectedPlaylists, setSelectedPlaylists] = useState([])
 
   function chooseTrack(track) {
     setPlayingTrack(track)
@@ -48,36 +49,36 @@ export default function Dashboard({ code }) {
     spotifyApi.setAccessToken(accessToken)
   }, [accessToken])
 
-  useEffect(() => {
-    if (!search) return setSearchResults([])
-    if (!accessToken) return
-    let cancel = false
-    spotifyApi.searchTracks(search).then(res => {
-      if (cancel) return
-      console.log("res: ", res)
-      console.log("setting search results")
-      setSearchResults(
-        res.body.tracks.items.map(track => {
-          const smallestAlbumImage = track.album.images.reduce(
-            (smallest, image) => {
-              if (image.height < smallest.height) return image
-              return smallest
-            },
-            track.album.images[0]
-          )
+  // useEffect(() => {
+  //   if (!search) return setSearchResults([])
+  //   if (!accessToken) return
+  //   let cancel = false
+  //   spotifyApi.searchTracks(search).then(res => {
+  //     if (cancel) return
+  //     console.log("res: ", res)
+  //     console.log("setting search results")
+  //     setSearchResults(
+  //       res.body.tracks.items.map(track => {
+  //         const smallestAlbumImage = track.album.images.reduce(
+  //           (smallest, image) => {
+  //             if (image.height < smallest.height) return image
+  //             return smallest
+  //           },
+  //           track.album.images[0]
+  //         )
 
-          return {
-            artist: track.artists[0].name,
-            title: track.name,
-            uri: track.uri,
-            albumUrl: smallestAlbumImage.url,
-          }
-        })
-      )
-    })
+  //         return {
+  //           artist: track.artists[0].name,
+  //           title: track.name,
+  //           uri: track.uri,
+  //           albumUrl: smallestAlbumImage.url,
+  //         }
+  //       })
+  //     )
+  //   })
 
-    return () => (cancel = true)
-  }, [search, accessToken])
+  //   return () => (cancel = true)
+  // }, [search, accessToken])
 
   const onSubmitRun = async (e) => {
     e.preventDefault()
@@ -93,6 +94,7 @@ export default function Dashboard({ code }) {
     
     const val = await axios.get("https://api.spotify.com/v1/me/playlists", config
     ).then((resp) => {
+      setPlaylists(resp.data.items)
       console.log("resp1: ", resp)
     })
     .catch((e) => {
@@ -100,26 +102,29 @@ export default function Dashboard({ code }) {
     })
   }
 
+  const addToPlaylist = (playlist) => {
+    setSelectedPlaylists([...selectedPlaylists, playlist])
+  }
+
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
-      <button style={{"height": '50px'}} onClick={onSubmitRun}> </button>
-      <Form.Control
+      <button style={{"height": '50px'}} onClick={onSubmitRun}> Click to see your playlists </button>
+      {/* <Form.Control
         type="search"
-        placeholder="Search Songs/Artists"
+        placeholder="Search Your Playlists"
         value={search}
         onChange={e => setSearch(e.target.value)}
-      />
+      /> */}
       <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
-        {searchResults.map(track => (
+        {playlists.map(playlist => (
           <TrackSearchResult
-            track={track}
-            key={track.uri}
-            chooseTrack={chooseTrack}
+            playlist={playlist}
+            selectPlaylist={addToPlaylist}
           />
         ))}
-        {searchResults.length === 0 && (
+        {playlists.length === 0 && (
           <div className="text-center" style={{ whiteSpace: "pre" }}>
-            {lyrics}
+            No PlayLists
           </div>
         )}
       </div>
