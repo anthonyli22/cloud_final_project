@@ -8,7 +8,7 @@ import axios from "axios"
 import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
-
+import { BrowserRouter as Router, Route, Navigate } from 'react-router-dom';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
@@ -27,6 +27,7 @@ export default function Dashboard({ code }) {
   const [playlists, setPlaylists] = useState([])
   const [selectedPlaylists, setSelectedPlaylists] = useState([])
   const [userData, setUserData] = useState({})
+  const [redirect1, setRedirect1] = useState(false)
   
   const getID = async () => {
     const val = await axios.get(url+"/me")
@@ -150,6 +151,7 @@ export default function Dashboard({ code }) {
         })
       } else {
         console.log("Group found?")
+        setRedirect1(true)
       }
     })
     .catch((e) => {
@@ -161,7 +163,9 @@ export default function Dashboard({ code }) {
     setSelectedPlaylists([...selectedPlaylists, playlist])
     console.log("playlists:", selectedPlaylists)
   }
-
+  if(redirect1){
+    return <Navigate to="/auxGroup" />
+  }
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
       <button style={{"height": '50px'}} onClick={onSubmitRun}> Click to see your playlists </button>
