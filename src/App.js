@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route path='/' element={<FrontPage/>}/>
             <Route path="/auxGroup" element={<AuxGroup/>}/>
+            <Route path="/create" element={<FrontPage/>}/>
             <Route path="*" element={<ErrorPage/>} />
           </Routes>
         </Router>

@@ -7,13 +7,20 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <Container
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <a className="btn btn-success btn-lg" href={AUTH_URL}>
-        Please Login With Spotify first
-      </a>
-    </Container>
+    <div style={styles}>
+      <h1 className="d-flex justify-content-center align-items-center"> Welcome to Party City! </h1>
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <a className="btn btn-success btn-lg" href={AUTH_URL}>
+          Please Login With Spotify first
+        </a>
+      </Container>
+    </div>
   )
+}
+
+const styles = {
+  backgroundImage: 'url("../pictures/frontPage.jpg")'
 }

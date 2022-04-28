@@ -191,9 +191,15 @@ export default function Dashboard({ code }) {
           </div>
         )}
       </div>
-      <div>
+      <a className="btn btn-success btn-lg" href={"/create"}>
+        Create a Party group!
+      </a>
+      <a className="btn btn-success btn-lg" href={"/create"}>
+        Join a Party group!
+      </a>
+      {/* <div>
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
-      </div>
+      </div> */}
     </Container>
   )
 }
