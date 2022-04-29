@@ -18,7 +18,7 @@ var url = 'https://api.spotify.com/v1'
 
 var backendURL = 'http://localhost:3001/'
 
-export default function Dashboard({ code }) {
+export default function Dashboard({ code, changeLeader }) {
   const accessToken = useAuth(code)
   const [search, setSearch] = useState("")
   // const [searchResults, setSearchResults] = useState([])
@@ -28,6 +28,7 @@ export default function Dashboard({ code }) {
   const [selectedPlaylists, setSelectedPlaylists] = useState([])
   const [userData, setUserData] = useState({})
   const [redirect1, setRedirect1] = useState(false)
+  const [redirectCreate, setRedirectCreate] = useState(false)
   
   const getID = async () => {
     const val = await axios.get(url+"/me")
@@ -163,8 +164,36 @@ export default function Dashboard({ code }) {
     setSelectedPlaylists([...selectedPlaylists, playlist])
     console.log("playlists:", selectedPlaylists)
   }
+
+  const createGroup = (e) => {
+    e.preventDefault()
+    Alert.fire({
+      title: "Creating Group",
+      html: 
+      `<p> You are about to create a group! <br/> Do you want to proceed? </p>`,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      showCancelButton: true,
+      confirmButtonColor: '#068a2f',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        changeLeader(true);
+        setRedirectCreate(true);
+      }
+    })
+  }
+
+  const setLeader = (e) => {
+    e.preventDefault()
+    changeLeader(false)
+  }
+
   if(redirect1){
     return <Navigate to="/auxGroup" />
+  }
+  else if(redirectCreate){
+    return <Navigate to="/playlist"/> 
   }
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
@@ -191,12 +220,12 @@ export default function Dashboard({ code }) {
           </div>
         )}
       </div>
-      <a className="btn btn-success btn-lg" href={"/create"}>
+      <button className="btn btn-success btn-lg" onClick={createGroup}>
         Create a Party group!
-      </a>
-      <a className="btn btn-success btn-lg" href={"/create"}>
+      </button>
+      <button className="btn btn-success btn-lg" onClick={setLeader} href={"/joinGroup"}>
         Join a Party group!
-      </a>
+      </button>
       {/* <div>
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
       </div> */}
