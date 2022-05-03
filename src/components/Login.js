@@ -8,13 +8,18 @@ const AUTH_URL =
 export default function Login() {
   return (
     <div style={styles}>
-      <h1 className="d-flex justify-content-center align-items-center"> Welcome to Party City! </h1>
+      <h1 className="d-flex justify-content-center"> Welcome to Party City! </h1>
+      <br/><br/><br/><br/><br/><br/>
+      <span className="justify-content-center" style={{'textAlign': 'center'}}>
+        <p> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </p>
+        <p> Then our custom algorithm will rank these songs and play them in order to ensure optimal enjoyment! </p>
+      </span>
+      <br/><br/><br/><br/><br/><br/>
       <Container
         className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "100vh" }}
       >
         <a className="btn btn-success btn-lg" href={AUTH_URL}>
-          Please Login With Spotify first
+        Please login with your Spotify account here!
         </a>
       </Container>
     </div>

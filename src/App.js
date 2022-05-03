@@ -1,35 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./components/Login"
-import Dashboard from "./components/Dashboard"
-import { BrowserRouter as  Router, Link, Route, Routes } from "react-router-dom"
+import Main from "./components/Main"
+// import { BrowserRouter as  Router, Link, Route, Routes } from "react-router-dom"
+// import { useState, useEffect } from "react"
+// import useAuth from "./components/useAuth"
 
-import AuxGroup from "./components/auxGroup"
+
+// import AuxGroup from "./components/auxGroup"
+// import WaitingRoom from "./components/waitingRoom"
+// import JoinGroup from "./components/joinGroup"
+// import SelectPlaylist from "./components/selectPlaylist"
 
 const code = new URLSearchParams(window.location.search).get("code")
 
 function App() {
-  console.log("code: ", code)
-  return ( 
-      <div>
-        <Router>
-          <Routes>
-            <Route path='/' element={<FrontPage/>}/>
-            <Route path="/auxGroup" element={<AuxGroup/>}/>
-            <Route path="/create" element={<FrontPage/>}/>
-            <Route path="*" element={<ErrorPage/>} />
-          </Routes>
-        </Router>
-      </div>
-    )
-    
-}
-
-function FrontPage(){
-  return code ? <Dashboard code={code} /> : <Login />
-}
-
-function ErrorPage(){
-  return <Link to="/"> This is not a valid page! Please click this link to return to the home page! </Link>
+  return code ? <Main code={code}/> : <Login />
 }
 
 export default App
