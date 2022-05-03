@@ -8,18 +8,12 @@ import axios from "axios"
 import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
-import { BrowserRouter as Router, Route, Navigate } from 'react-router-dom';
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
-})
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-
 var backendURL = 'http://localhost:3001/'
 
-export default function Dashboard({ code, changeLeader }) {
-  const accessToken = useAuth(code)
+export default function Dashboard({ changeLeader, accessToken }) {
   const [search, setSearch] = useState("")
   // const [searchResults, setSearchResults] = useState([])
   const [playingTrack, setPlayingTrack] = useState()
@@ -29,9 +23,19 @@ export default function Dashboard({ code, changeLeader }) {
   const [userData, setUserData] = useState({})
   const [redirect1, setRedirect1] = useState(false)
   const [redirectCreate, setRedirectCreate] = useState(false)
-  
+  const [redirectJoin, setRedirectJoin] = useState(false)
+  const [idFlag, setIdFlag] = useState(false)
+
   const getID = async () => {
-    const val = await axios.get(url+"/me")
+    var head = "Bearer " + accessToken
+    console.log("accesstoken: ", accessToken)
+    let config = {
+      headers: {
+        "Authorization": head,
+        'Content-Type': 'application/json'
+      }
+    }
+    await axios.get(url+"/me", config)
     .then((resp) => {
       console.log("get me: ", resp)
       setUserData(resp.data)
@@ -48,7 +52,6 @@ export default function Dashboard({ code, changeLeader }) {
   // }
 
   useEffect(() => {
-    getID()
     if (!playingTrack) return
 
     axios
@@ -62,42 +65,6 @@ export default function Dashboard({ code, changeLeader }) {
         setLyrics(res.data.lyrics)
       })
   }, [playingTrack])
-
-  useEffect(() => {
-    if (!accessToken) return
-    spotifyApi.setAccessToken(accessToken)
-  }, [accessToken])
-
-  // useEffect(() => {
-  //   if (!search) return setSearchResults([])
-  //   if (!accessToken) return
-  //   let cancel = false
-  //   spotifyApi.searchTracks(search).then(res => {
-  //     if (cancel) return
-  //     console.log("res: ", res)
-  //     console.log("setting search results")
-  //     setSearchResults(
-  //       res.body.tracks.items.map(track => {
-  //         const smallestAlbumImage = track.album.images.reduce(
-  //           (smallest, image) => {
-  //             if (image.height < smallest.height) return image
-  //             return smallest
-  //           },
-  //           track.album.images[0]
-  //         )
-
-  //         return {
-  //           artist: track.artists[0].name,
-  //           title: track.name,
-  //           uri: track.uri,
-  //           albumUrl: smallestAlbumImage.url,
-  //         }
-  //       })
-  //     )
-  //   })
-
-  //   return () => (cancel = true)
-  // }, [search, accessToken])
 
   const onSubmitRun = async (e) => {
     e.preventDefault()
@@ -187,43 +154,24 @@ export default function Dashboard({ code, changeLeader }) {
   const setLeader = (e) => {
     e.preventDefault()
     changeLeader(false)
+    setRedirectJoin(true)
   }
 
   if(redirect1){
-    return <Navigate to="/auxGroup" />
+    return <Redirect to="/auxGroup" />
   }
   else if(redirectCreate){
-    return <Navigate to="/playlist"/> 
+    return <Redirect to="/playlist"/> 
+  }
+  else if(redirectJoin){
+    return <Redirect to={"/joinGroup"}/>
   }
   return (
     <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
-      <button style={{"height": '50px'}} onClick={onSubmitRun}> Click to see your playlists </button>
-      <button style={{"height": '50px'}} onClick={createNewAuxGroup}> Create a new Aux group </button>
-      <input id="input1" style={{"height": '50px'}} />
-      <button onClick={findAuxGroup}> Submit</button>
-      {/* <Form.Control
-        type="search"
-        placeholder="Search Your Playlists"
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      /> */}
-      <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
-        {playlists.map(playlist => (
-          <TrackSearchResult
-            playlist={playlist}
-            selectPlaylist={addToPlaylist}
-          />
-        ))}
-        {playlists.length === 0 && (
-          <div className="text-center" style={{ whiteSpace: "pre" }}>
-            No PlayLists
-          </div>
-        )}
-      </div>
       <button className="btn btn-success btn-lg" onClick={createGroup}>
         Create a Party group!
       </button>
-      <button className="btn btn-success btn-lg" onClick={setLeader} href={"/joinGroup"}>
+      <button className="btn btn-success btn-lg" onClick={setLeader}>
         Join a Party group!
       </button>
       {/* <div>

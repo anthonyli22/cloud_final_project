@@ -8,7 +8,7 @@ export default function TrackSearchResult({ playlist, selectPlaylist }) {
   return (
     <div
       className="d-flex m-2 align-items-center"
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer", 'alignContent': 'center' }}
       onClick={handlePlay}
     >
       <img alt="No" src={playlist.images[0].url} style={{ height: "64px", width: "64px" }} />

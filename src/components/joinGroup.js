@@ -8,25 +8,45 @@ import axios from "axios"
 import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
-import { Redirect, Link, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 
-export default function joinGroup() {
+export default function JoinGroup() {
+    const [redirectNext, setRedirectNext] = useState(false)
+    const [redirectBack, setRedirectBack] = useState(false)
+    var prevPage = "Prev Page"
+
+    const nextRoom = (e) => {
+        e.preventDefault()
+        setRedirectNext(true)
+    }
+
+    const prevRoom = (e) => {
+        e.preventDefault()
+        setRedirectBack(true)
+    }
+
+    if(redirectNext){
+        return <Redirect to={"/playlist"}/>
+    }
+    else if(redirectBack){
+        return <Redirect to={"/"}/>
+    }
     return (
-        <div> 
+        <div style={{'textAlign': 'center', 'margin': 'auto'}}> 
             <h1> Join Code Room</h1>
-            <p> Please enter your group code. 
+            <p style={{'marginTop': "10%"}}> Please enter your group code. 
                 You should've gotten this from the group leader
-
-                If no one has created a group yet, hit the “return” 
-                button below 
+                <br/>
+                If no one has created a group yet, hit the "{prevPage}" button below 
             </p>
-            <input>
-            
-            </input>
+            <div>
+                <input style={{'marginTop': "5%"}}/> <button onClick={nextRoom}> Submit</button>  <br/>
 
-            <a className="btn btn-success btn-lg" href="/"> Return to previous page </a>
-            <a className="btn btn-success btn-lg" href="/playlist" > Next Page </a>
+                <button style={{'marginRight': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
+                <button style={{'marginLeft': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={nextRoom}> Next Page </button>
+            </div>
+            
         </div>
     )
 }
