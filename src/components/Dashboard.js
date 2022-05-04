@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 var url = 'https://api.spotify.com/v1'
 var backendURL = 'http://localhost:3001/'
 
-export default function Dashboard({ changeLeader, accessToken }) {
+export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   const [search, setSearch] = useState("")
   // const [searchResults, setSearchResults] = useState([])
   const [playingTrack, setPlayingTrack] = useState()
@@ -45,6 +45,10 @@ export default function Dashboard({ changeLeader, accessToken }) {
     })
   }
 
+  useEffect(() => {
+    getID()
+  }, [accessToken])
+
   // function chooseTrack(track) {
   //   setPlayingTrack(track)
   //   setSearch("")
@@ -66,72 +70,6 @@ export default function Dashboard({ changeLeader, accessToken }) {
       })
   }, [playingTrack])
 
-  const onSubmitRun = async (e) => {
-    e.preventDefault()
-    if(!accessToken) return
-    var head = "Bearer " + accessToken
-    console.log("accesstoken: ", accessToken)
-    let config = {
-      headers: {
-        "Authorization": head,
-        'Content-Type': 'application/json'
-      }
-    }
-    
-    const val = await axios.get("https://api.spotify.com/v1/me/playlists", config
-    ).then((resp) => {
-      setPlaylists(resp.data.items)
-      console.log("resp1: ", resp)
-    })
-    .catch((e) => {
-      console.log("error: ", e)
-    })
-  }
-
-  const createNewAuxGroup = async (e) => {
-    e.preventDefault()
-    const val = await axios.post(backendURL + "group/create", {
-      uid: userData.id
-    })
-    .then((resp) => {
-      console.log("aux create resp: ", resp);
-    })
-    .catch((e) => {
-      console.log("error: ", e)
-    })
-  }
-
-  const findAuxGroup = async (e) => {
-    var val = document.getElementById("input1").value;
-    console.log("find aux: ", val)
-    const group = await axios.get(backendURL + "group/find/" + val)
-    .then((resp) => {
-      console.log("findAuxGroup: ", resp)
-      if(resp.data.length === 0){
-        Alert.fire({
-          title: "Cannot find aux group"
-  
-        })
-        .then((result) => {
-          if(result.isConfirmed) {
-            document.getElementById("input1").value = "";
-          }
-        })
-      } else {
-        console.log("Group found?")
-        setRedirect1(true)
-      }
-    })
-    .catch((e) => {
-      console.log("error: ", e)
-    })
-  }
-
-  const addToPlaylist = (playlist) => {
-    setSelectedPlaylists([...selectedPlaylists, playlist])
-    console.log("playlists:", selectedPlaylists)
-  }
-
   const createGroup = (e) => {
     e.preventDefault()
     Alert.fire({
@@ -143,10 +81,22 @@ export default function Dashboard({ changeLeader, accessToken }) {
       showCancelButton: true,
       confirmButtonColor: '#068a2f',
     })
-    .then((result) => {
+    .then( async (result) => {
       if (result.isConfirmed) {
-        changeLeader(true);
-        setRedirectCreate(true);
+        console.log("user id: ", userData.id)
+        await axios.post(backendURL + "group/create", {
+          uid: userData.id
+        })
+        .then((resp) => {
+          console.log("aux create resp: ", resp);
+          setGroupID(resp.data['id'])
+          changeLeader(true);
+          setRedirectCreate(true);
+        })
+        .catch((e) => {
+          console.log("error: ", e)
+        })
+        
       }
     })
   }

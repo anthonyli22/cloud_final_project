@@ -11,6 +11,7 @@ import WaitingRoom from "./waitingRoom"
 import JoinGroup from "./joinGroup"
 import SelectPlaylist from "./selectPlaylist"
 import Dashboard from "./Dashboard"
+import ListeningRoom from "./ListeningRoom"
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
@@ -19,7 +20,9 @@ const spotifyApi = new SpotifyWebApi({
 export default function Main({ code }) {
   const accessToken = useAuth(code)
   const [leader, setLeader] = useState(false)
-  
+  const [playlist, setPlaylist] = useState([])
+  const [groupID, setID] = useState(0)
+
   useEffect(() => {
     if (!accessToken) return
     spotifyApi.setAccessToken(accessToken)
@@ -28,6 +31,14 @@ export default function Main({ code }) {
 
   const leaderStatus = (val) => {
     setLeader(val)
+  }
+
+  const changePlaylist = (list) => {
+    setPlaylist(list)
+  }
+
+  const setGroupID = (id) => {
+    setID(id)
   }
 
   function ErrorPage(){
@@ -53,28 +64,42 @@ export default function Main({ code }) {
         <Router>
             <Route path='/'
               render={(props) => (<>
-                <Dashboard changeLeader={leaderStatus} accessToken={accessToken}/>
+                <Dashboard 
+                  changeLeader={leaderStatus} 
+                  accessToken={accessToken}
+                  setGroupID={setGroupID}
+                  />
               </>)}
             />
-            
-            <Route path="/auxGroup" 
-              render={(props) => (<>
-                <AuxGroup/>
-              </>)}
+            <Route path={'/listeningRoom'}
+                render={(props) => (<>
+                  <ListeningRoom accessToken={accessToken} playingTrack={playlist}/>
+                </>)}
             />
             <Route path="/playlist"
               render={(props) => (<>
-                <SelectPlaylist leader={leader} accessToken={accessToken}/>
+                <SelectPlaylist 
+                  leader={leader} 
+                  accessToken={accessToken} 
+                  changePlaylist={changePlaylist} 
+                  groupID={groupID}
+                />
               </>)}
             />
             <Route path="/waitingRoom" 
               render={(props) => (<>
-                <WaitingRoom leader={leader} /> 
+                <WaitingRoom 
+                  leader={leader} 
+                  playlist={playlist}
+                  /> 
               </>)}
             />
             <Route path="/joinGroup" 
               render={(props) => (<>
-                <JoinGroup status={leaderStatus}/>
+                <JoinGroup 
+                  status={leaderStatus}
+                  setGroupID={setGroupID}
+                />
               </>)}
             />
             {/* <Route path="*"  

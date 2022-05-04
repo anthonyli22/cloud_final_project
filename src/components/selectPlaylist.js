@@ -13,7 +13,7 @@ import { Redirect, Link, useHistory } from 'react-router-dom';
 var url = 'https://api.spotify.com/v1'
 var backendURL = 'http://localhost:3001/'
 
-export default function SelectPlaylist({ leader, accessToken }) {
+export default function SelectPlaylist({ leader, accessToken, changePlaylist, groupID }) {
     const [redirect, setRedirect] = useState(false);
     const [playlists, setPlaylists] = useState([])
     const [selectedPlaylists, setSelectedPlaylists] = useState([])
@@ -46,24 +46,26 @@ export default function SelectPlaylist({ leader, accessToken }) {
     }
     
     const addToPlaylist = (playlist) => {
-    setSelectedPlaylists([...selectedPlaylists, playlist])
-    console.log("playlists:", selectedPlaylists)
+        changePlaylist(playlist)
+        console.log("playlists:", playlist)
+        setRedirect(true)
     }
 
     if (redirect) {
-        if(leader){
-            return <Redirect to={"/leaderRoom"} />
-        }
-        else {
-            return <Redirect to={"/waitingRoom"} />
-        }
+        // if(leader){
+        //     return <Redirect to={"/leaderRoom"} />
+        // }
+        // else {
+        //     return <Redirect to={"/waitingRoom"} />
+        // }
+        return <Redirect to={"/waitingRoom"} />
     }
     else {
         return (
             <div style={{'textAlign': 'center', 'margin': 'auto'}}> 
                 <h1> Select Playlist</h1>
 
-                <p> Your Key: </p>
+                <p> Your Key: {groupID} </p>
 
                 <input></input>
                 <button onClick={onSubmitRun}> Find Playlists </button>
