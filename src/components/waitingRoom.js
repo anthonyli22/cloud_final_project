@@ -9,14 +9,30 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
+import io from 'socket.io-client'
 
+const socket = io.connect("http://localhost:3001");
 
-export default function WaitingRoom({leader}) {
+export default function WaitingRoom({leader, groupID}) {
     const [startMusic, setStartMusic] = useState(false)
 
     const start = () => {
+        socket.emit("button_pressed", {groupID} )
+        console.log("set musics to trueeee21321321", {groupID})
         setStartMusic(true)
     }
+
+    useEffect(() => {
+        socket.on("receive_pressed", (data) => {
+            console.log("set musics to trueeee")
+            setStartMusic(true)
+        })
+    })
+
+    useEffect(() => {
+        socket.emit("join", groupID)
+    }, [groupID])
+
     if(startMusic){
         return <Redirect to={'/listeningRoom'} />
     }
