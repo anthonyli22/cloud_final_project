@@ -91,6 +91,7 @@ export default function Main({ code }) {
                 <WaitingRoom 
                   leader={leader} 
                   playlist={playlist}
+                  groupID={groupID}
                   /> 
               </>)}
             />
