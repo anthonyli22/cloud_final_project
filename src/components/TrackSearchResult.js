@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function TrackSearchResult({ playlist, selectPlaylist }) {
-  console.log("list1: ", playlist.images)
+  // console.log("list1: ", playlist.images)
   function handlePlay() {
     selectPlaylist(playlist)
   }
