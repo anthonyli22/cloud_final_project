@@ -37,8 +37,9 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
         console.log("moneykkkd")
         const val = await axios.get("https://api.spotify.com/v1/me/playlists", config
         ).then((resp) => {
-          setPlaylists(resp.data.items)
           console.log("resp1: ", resp)
+          setPlaylists(resp.data.items)
+          console.log("playlistssadsad: ", playlists)
         })
         .catch((e) => {
           console.log("error: ", e)
@@ -61,8 +62,10 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
         return <Redirect to={"/waitingRoom"} />
     }
     else {
+        console.log("playlists123: ", playlists)
         return (
-            <div style={{'textAlign': 'center', 'margin': 'auto'}}> 
+            
+            <div style={{'textAlign': 'center', 'margin': 'auto', 'alignContent': 'center'}}> 
                 <h1> Select Playlist</h1>
 
                 <p> Your Key: {groupID} </p>
@@ -71,9 +74,9 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
                 <button onClick={onSubmitRun}> Find Playlists </button>
 
                 <div className="flex-grow-1 my-2" style={{ overflowY: "auto",'alignContent': 'center' }}>
-                    {playlists.map(playlist => (
+                    {playlists.map(list => (
                     <TrackSearchResult
-                        playlist={playlist}
+                        playlist={list}
                         selectPlaylist={addToPlaylist}
                     />
                     ))}

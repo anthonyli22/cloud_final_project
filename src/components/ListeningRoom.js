@@ -12,7 +12,7 @@ import { Redirect, Link, useHistory } from 'react-router-dom';
 
 
 export default function ListeningRoom({accessToken, playingTrack}) {
-
+    // console.log("playing: ", playingTrack)
     return (
         <div style={{'textAlign': 'center'}}> 
             <p> Listening!!!</p>
