@@ -72,7 +72,9 @@ export default function JoinGroup({setGroupID}) {
                 <button style={{'marginRight': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
                 <button style={{'marginLeft': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={nextRoom}> Next Page </button>
             </div>
-            
+            <div>
+                
+            </div>
         </div>
     )
 }
