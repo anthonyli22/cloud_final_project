@@ -7,7 +7,7 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <div style={styles}>
+    <div style={{}}>
       <h1 className="d-flex justify-content-center"> Welcome to Party City! </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
@@ -22,10 +22,9 @@ export default function Login() {
         Please login with your Spotify account here!
         </a>
       </Container>
+      <span>
+
+      </span>
     </div>
   )
-}
-
-const styles = {
-  backgroundImage: 'url("../pictures/frontPage.jpg")'
 }
