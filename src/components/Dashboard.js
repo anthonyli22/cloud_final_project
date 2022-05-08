@@ -124,9 +124,6 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
       <button className="btn btn-success btn-lg" onClick={setLeader}>
         Join a Party group!
       </button>
-      {/* <div>
-        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
-      </div> */}
     </Container>
   )
 }
