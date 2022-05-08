@@ -22,9 +22,8 @@ jobs:
           node-version: '12.x'
       
       - name: npm test:ci
-        run: npm run test:ci
         env:
-          CI: false
+          CI: ""
 
       - name: npm install, build, and test
         run: |
