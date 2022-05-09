@@ -1,5 +1,6 @@
 import React from "react"
 import { Container } from "react-bootstrap"
+import img1 from "../pictures/pic1.jpg"
 
 // const clientID = "37ff2a2a358a41f7bf29cb92dde7dc78"
 const AUTH_URL =
@@ -7,8 +8,8 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <div style={{}}>
-      <h1 className="d-flex justify-content-center"> Welcome to Party City! </h1>
+    <div style={{'backgroundImage': img1}}>
+      <h1 className="d-flex justify-content-center"> Who Got the Aux!? </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
         <p> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </p>

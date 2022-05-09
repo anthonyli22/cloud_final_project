@@ -11,7 +11,7 @@ import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-var backendURL = 'http://localhost:3001/'
+var backendURL = 'https://cloudback.azurewebsites.net/'
 
 export default function JoinGroup({setGroupID}) {
     const [redirectNext, setRedirectNext] = useState(false)
