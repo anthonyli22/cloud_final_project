@@ -11,7 +11,7 @@ import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-var backendURL = 'http://localhost:3001/'
+var backendURL = 'https://cloudback.azurewebsites.net/'
 
 export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   const [search, setSearch] = useState("")
@@ -59,7 +59,7 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
     if (!playingTrack) return
 
     axios
-      .get("http://localhost:3001/lyrics", {
+      .get("https://cloudback.azurewebsites.net/lyrics", {
         params: {
           track: playingTrack.title,
           artist: playingTrack.artist,

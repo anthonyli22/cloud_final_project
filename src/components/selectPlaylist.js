@@ -11,7 +11,7 @@ import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-var backendURL = 'http://localhost:3001/'
+var backendURL = 'https://cloudback.azurewebsites.net/'
 
 export default function SelectPlaylist({ leader, accessToken, changePlaylist, groupID }) {
     const [redirect, setRedirect] = useState(false);
