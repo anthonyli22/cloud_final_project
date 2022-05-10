@@ -9,22 +9,13 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { backendURL, spotifyURL } from "./urls"
 
-var url = 'https://api.spotify.com/v1'
-var backendURL = 'https://cloudback.azurewebsites.net/'
 
 export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
-  const [search, setSearch] = useState("")
-  // const [searchResults, setSearchResults] = useState([])
-  const [playingTrack, setPlayingTrack] = useState()
-  const [lyrics, setLyrics] = useState("")
-  const [playlists, setPlaylists] = useState([])
-  const [selectedPlaylists, setSelectedPlaylists] = useState([])
   const [userData, setUserData] = useState({})
-  const [redirect1, setRedirect1] = useState(false)
   const [redirectCreate, setRedirectCreate] = useState(false)
   const [redirectJoin, setRedirectJoin] = useState(false)
-  const [idFlag, setIdFlag] = useState(false)
 
   const getID = async () => {
     var head = "Bearer " + accessToken
@@ -35,7 +26,7 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
         'Content-Type': 'application/json'
       }
     }
-    await axios.get(url+"/me", config)
+    await axios.get(spotifyURL+"me", config)
     .then((resp) => {
       console.log("get me: ", resp)
       setUserData(resp.data)
@@ -48,27 +39,6 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   useEffect(() => {
     getID()
   }, [accessToken])
-
-  // function chooseTrack(track) {
-  //   setPlayingTrack(track)
-  //   setSearch("")
-  //   setLyrics("")
-  // }
-
-  useEffect(() => {
-    if (!playingTrack) return
-
-    axios
-      .get("https://cloudback.azurewebsites.net/lyrics", {
-        params: {
-          track: playingTrack.title,
-          artist: playingTrack.artist,
-        },
-      })
-      .then(res => {
-        setLyrics(res.data.lyrics)
-      })
-  }, [playingTrack])
 
   const createGroup = (e) => {
     e.preventDefault()
@@ -107,10 +77,8 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
     setRedirectJoin(true)
   }
 
-  if(redirect1){
-    return <Redirect to="/auxGroup" />
-  }
-  else if(redirectCreate){
+
+  if(redirectCreate){
     return <Redirect to="/playlist"/> 
   }
   else if(redirectJoin){

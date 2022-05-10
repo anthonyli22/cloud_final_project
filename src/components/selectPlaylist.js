@@ -1,26 +1,12 @@
-import { useState, useEffect } from "react"
-import useAuth from "./useAuth"
-import Player from "./Player"
+import { useState } from "react"
 import TrackSearchResult from "./TrackSearchResult"
-import { Container, Form } from "react-bootstrap"
-import SpotifyWebApi from "spotify-web-api-node"
 import axios from "axios"
-import requests from "requests"
-import { Button } from "bootstrap"
-import Alert from 'sweetalert2';
-import { Redirect, Link, useHistory } from 'react-router-dom';
-
-var url = 'https://api.spotify.com/v1'
-var backendURL = 'https://cloudback.azurewebsites.net/'
+import { Redirect } from 'react-router-dom';
+import { backendURL, spotifyURL } from './urls';
 
 export default function SelectPlaylist({ leader, accessToken, changePlaylist, groupID }) {
     const [redirect, setRedirect] = useState(false);
     const [playlists, setPlaylists] = useState([])
-    const [selectedPlaylists, setSelectedPlaylists] = useState([])
-    const selected = (e) => {
-        e.preventDefault()
-        setRedirect(true)
-    }
 
     const onSubmitRun = async (e) => {
         e.preventDefault()
@@ -35,7 +21,7 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
           }
         }
         console.log("moneykkkd")
-        const val = await axios.get("https://api.spotify.com/v1/me/playlists", config
+        const val = await axios.get(spotifyURL+"me/playlists", config
         ).then((resp) => {
           console.log("resp1: ", resp)
           setPlaylists(resp.data.items)

@@ -8,8 +8,12 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <div style={{'backgroundImage': img1}}>
-      <h1 className="d-flex justify-content-center"> Who Got the Aux!? </h1>
+    <div style={{'backgroundImage': img1, "backgroundColor": "orange"}}>
+      <h1 
+        className="d-flex justify-content-center"
+        style={{'marginTop': "15px"}}
+      > 
+      Who Got the Aux!? </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
         <p> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </p>

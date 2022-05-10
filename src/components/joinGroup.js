@@ -9,9 +9,7 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-
-var url = 'https://api.spotify.com/v1'
-var backendURL = 'https://cloudback.azurewebsites.net/'
+import { backendURL, url } from './urls';
 
 export default function JoinGroup({setGroupID}) {
     const [redirectNext, setRedirectNext] = useState(false)

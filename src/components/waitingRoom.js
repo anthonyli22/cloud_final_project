@@ -10,8 +10,9 @@ import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 import io from 'socket.io-client'
+import { backendURL, url } from './urls';
 
-const socket = io.connect("https://cloudback.azurewebsites.net/");
+const socket = io.connect(backendURL);
 
 export default function WaitingRoom({leader, groupID}) {
     const [startMusic, setStartMusic] = useState(false)

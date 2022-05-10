@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { backendURL, url } from './urls';
 
 export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState()
@@ -8,7 +9,7 @@ export default function useAuth(code) {
 
   useEffect(() => {
     axios
-      .post("https://cloudback.azurewebsites.net/login", {
+      .post(backendURL+ "login", {
         code,
       })
       .then(res => {
@@ -26,7 +27,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return
     const interval = setInterval(() => {
       axios
-        .post("https://cloudback.azurewebsites.net/refresh", {
+        .post(backendURL+"refresh", {
           refreshToken,
         })
         .then(res => {

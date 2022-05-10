@@ -1,17 +1,16 @@
 import SpotifyWebApi from "spotify-web-api-node"
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import { BrowserRouter as  Router, Link, Route, Routes } from "react-router-dom"
+import { BrowserRouter as  Router, Link, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import useAuth from "./useAuth"
-import App from '../App'
 
-import AuxGroup from "./auxGroup"
 import WaitingRoom from "./waitingRoom"
 import JoinGroup from "./joinGroup"
 import SelectPlaylist from "./selectPlaylist"
 import Dashboard from "./Dashboard"
 import ListeningRoom from "./ListeningRoom"
+import { backendURL, url } from './urls';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
@@ -53,9 +52,28 @@ export default function Main({ code }) {
   
   function Header(){
     return (
-      <span>
-        <p> <a href="/"> Home Page</a> <p style={{'textAlign': 'center'}}> Created by Anthony Li, John Lee, and Mahin Chowdhury</p> </p>
-      </span>)
+      <header
+      className="header"
+      style={{
+        // marginBottom: window.location.pathname == "/login" ? '0' : '5%',
+        marginLeft: '0px',
+        marginTop: '0px',
+        backgroundColor: '#e9f5fd'
+      }}
+    >
+      <h1
+        style={{
+          marginBottom: '7px',
+          marginLeft: '2%',
+          marginTop: '7px',
+          fontFamily: 'Arya',
+          fontWeight: '450'
+        }}
+      >
+        {"Aux"}
+      </h1>
+    </header>
+    )
   }
 
   return ( 
