@@ -11,7 +11,7 @@ import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-var backendURL = 'https://cloudback.azurewebsites.net/'
+var backendURL = 'http://localhost:5000/'
 
 export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   const [search, setSearch] = useState("")
@@ -21,7 +21,6 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   const [playlists, setPlaylists] = useState([])
   const [selectedPlaylists, setSelectedPlaylists] = useState([])
   const [userData, setUserData] = useState({})
-  const [redirect1, setRedirect1] = useState(false)
   const [redirectCreate, setRedirectCreate] = useState(false)
   const [redirectJoin, setRedirectJoin] = useState(false)
   const [idFlag, setIdFlag] = useState(false)
@@ -48,27 +47,6 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
   useEffect(() => {
     getID()
   }, [accessToken])
-
-  // function chooseTrack(track) {
-  //   setPlayingTrack(track)
-  //   setSearch("")
-  //   setLyrics("")
-  // }
-
-  useEffect(() => {
-    if (!playingTrack) return
-
-    axios
-      .get("https://cloudback.azurewebsites.net/lyrics", {
-        params: {
-          track: playingTrack.title,
-          artist: playingTrack.artist,
-        },
-      })
-      .then(res => {
-        setLyrics(res.data.lyrics)
-      })
-  }, [playingTrack])
 
   const createGroup = (e) => {
     e.preventDefault()
@@ -107,10 +85,8 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
     setRedirectJoin(true)
   }
 
-  if(redirect1){
-    return <Redirect to="/auxGroup" />
-  }
-  else if(redirectCreate){
+
+  if(redirectCreate){
     return <Redirect to="/playlist"/> 
   }
   else if(redirectJoin){

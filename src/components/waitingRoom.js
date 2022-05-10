@@ -11,7 +11,11 @@ import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 import io from 'socket.io-client'
 
-const socket = io.connect("https://cloudback.azurewebsites.net/");
+const url = "http://localhost:5000/"
+
+const a = "https://cloudback.azurewebsites.net/"
+
+const socket = io.connect(url);
 
 export default function WaitingRoom({leader, groupID}) {
     const [startMusic, setStartMusic] = useState(false)

@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
+const url = "https://cloudback.azurewebsites.net"
+
+const url1 = "http://localhost:5000/"
+
 export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState()
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
-
+  console.log("Loggers")
   useEffect(() => {
     axios
-      .post("https://cloudback.azurewebsites.net/login", {
+      .post("http://localhost:5000/login", {
         code,
       })
       .then(res => {
+        
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
@@ -26,7 +31,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return
     const interval = setInterval(() => {
       axios
-        .post("https://cloudback.azurewebsites.net/refresh", {
+        .post("http://localhost:5000/refresh", {
           refreshToken,
         })
         .then(res => {

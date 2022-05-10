@@ -11,16 +11,11 @@ import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
 var url = 'https://api.spotify.com/v1'
-var backendURL = 'https://cloudback.azurewebsites.net/'
+var backendURL = 'http://localhost:5000/'
 
 export default function SelectPlaylist({ leader, accessToken, changePlaylist, groupID }) {
     const [redirect, setRedirect] = useState(false);
     const [playlists, setPlaylists] = useState([])
-    const [selectedPlaylists, setSelectedPlaylists] = useState([])
-    const selected = (e) => {
-        e.preventDefault()
-        setRedirect(true)
-    }
 
     const onSubmitRun = async (e) => {
         e.preventDefault()
@@ -39,7 +34,6 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
         ).then((resp) => {
           console.log("resp1: ", resp)
           setPlaylists(resp.data.items)
-          console.log("playlistssadsad: ", playlists)
         })
         .catch((e) => {
           console.log("error: ", e)
@@ -53,12 +47,6 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
     }
 
     if (redirect) {
-        // if(leader){
-        //     return <Redirect to={"/leaderRoom"} />
-        // }
-        // else {
-        //     return <Redirect to={"/waitingRoom"} />
-        // }
         return <Redirect to={"/waitingRoom"} />
     }
     else {

@@ -4,9 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as  Router, Link, Route, Routes } from "react-router-dom"
 import { useState, useEffect } from "react"
 import useAuth from "./useAuth"
-import App from '../App'
 
-import AuxGroup from "./auxGroup"
 import WaitingRoom from "./waitingRoom"
 import JoinGroup from "./joinGroup"
 import SelectPlaylist from "./selectPlaylist"
