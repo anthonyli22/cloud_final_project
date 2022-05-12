@@ -56,7 +56,7 @@ export default function Login() {
       Who Got the Aux!? </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
-        <h5> <b style={{fontSize: "25px"}}> Who Got the Aux!? </b> is a web application where you can create a group playlist of music using existing playlists that each user already has. </h5>
+        <h5> <b style={{fontSize: "25px"}}> Who Got the Aux!? </b> is a web application where you can create a group playlist of music using songs that each user inputs. </h5>
         <h5> Then our custom algorithm will rank these songs and play them in order to ensure optimal enjoyment! </h5>
       </span>
       <br/><br/><br/><br/><br/><br/>
