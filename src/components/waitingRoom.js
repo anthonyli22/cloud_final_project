@@ -10,7 +10,7 @@ import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 import io from 'socket.io-client'
-import { backendURL, url } from './urls';
+import { backendURL, frontendURL, spotifyURL } from './urls';
 
 const socket = io.connect(backendURL);
 
@@ -18,6 +18,7 @@ export default function WaitingRoom({leader, groupID, changeSong, accessToken, u
     const [startMusic, setStartMusic] = useState(false)
 
     const start =  async () => {
+        console.log("userData.id: ", userData.id)
         await axios.post(backendURL+"createGroupPlaylist", {
             "group_id":groupID,
             "accessToken": accessToken,
@@ -25,8 +26,8 @@ export default function WaitingRoom({leader, groupID, changeSong, accessToken, u
         })
         .then((recList) => {
             console.log("recList: ", recList)
-            const recListData = recList.data["recList"]
-            changeSong(recList.data["recList"])
+            const recListData = recList['data']['recList']
+            changeSong(recListData)
             socket.emit("button_pressed", {groupID, recListData} )
             console.log("set musics to trueeee21321321", {groupID})
         })
@@ -54,10 +55,10 @@ export default function WaitingRoom({leader, groupID, changeSong, accessToken, u
         return <Redirect to={'/listeningRoom'} />
     }
     return (
-        <div style={{'textAlign': 'center', 'margin': 'auto', height: "90vh"}}> 
-            {leader === false && <h1 style={{'textAlign': 'center'}}> Waiting for group leader to start...</h1>}
+        <div style={{'textAlign': 'center', 'margin': 'auto', height: "90vh", backgroundImage: "url("+frontendURL+'pic5.jpg)'}}> 
+            {leader === false && <h1 style={{'textAlign': 'center', color: "white"}}> Waiting for group leader to start...</h1>}
             {leader === true && 
-                <div >
+                <div style={{color: "white"}} >
                     <h1 > You are the leader </h1>
                     <p > Now when you group is ready, you may click the "Start" button below <br/> 
                         and we'll generate a playlist to your group's taste. <br/> Enjoy! </p>

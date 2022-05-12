@@ -9,7 +9,7 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { backendURL, spotifyURL } from "./urls"
+import { backendURL, frontendURL, spotifyURL } from "./urls"
 
 
 export default function Dashboard({ changeLeader, accessToken, setGroupID, setMyData }) {
@@ -86,10 +86,10 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID, setMy
     return <Redirect to={"/joinGroup"}/>
   }
   return (
-    <div style={{"position": "50%"}}>
-      <p> {"_"}</p>
-      <Container className="d-flex flex-column py-2" style={{ height: "85vh" }}>
-        <button className="btn btn-success btn-lg" onClick={createGroup}>
+    <div style={{"position": "50%", backgroundImage: "url("+frontendURL+'pic1.jpg)'}}>
+      <h1  style={{alignContent: "center", textAlign: "center", color: "white", backgroundColor: "black", padding: "0px"}}> The Aux Dashboard Page </h1>
+      <Container className="d-flex flex-column py-2" style={{ height: "55vh", marginTop: "15%" }}>
+        <button className="btn btn-success btn-lg" onClick={createGroup} style={{marginBottom: "1%"}}>
           Create a Party group!
         </button>
         <button className="btn btn-success btn-lg" onClick={setLeader}>

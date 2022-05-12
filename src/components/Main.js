@@ -40,10 +40,6 @@ export default function Main({ code }) {
   const setGroupID = (id) => {
     setID(id)
   }
-
-  function ErrorPage(){
-    return <Link to="/"> This is not a valid page! Please click this link to return to the home page! </Link>
-  }
   
   function Footer(){
     return (
@@ -71,7 +67,7 @@ export default function Main({ code }) {
           fontWeight: '450'
         }}
       >
-        {"Aux"}
+        {"."}
       </h1>
     </header>
     )
@@ -82,6 +78,16 @@ export default function Main({ code }) {
         <Header> </Header>
         <Router>
             <Route path='/'
+              render={(props) => (<>
+                <Dashboard 
+                  changeLeader={leaderStatus} 
+                  accessToken={accessToken}
+                  setGroupID={setGroupID}
+                  setMyData={setUserData}
+                  />
+              </>)}
+            />
+            <Route path='/dashboard'
               render={(props) => (<>
                 <Dashboard 
                   changeLeader={leaderStatus} 
@@ -143,4 +149,6 @@ const styles = {
   'textAlign': 'center',
   'position': 'relative',
   'bottom': 0,
+  'backgroundColor': "lightblue",
+  "height": "5vh"
 }

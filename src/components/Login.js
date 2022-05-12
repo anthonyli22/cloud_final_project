@@ -1,14 +1,13 @@
 import React from "react"
 import { Container } from "react-bootstrap"
-import img1 from "../pictures/pic1.jpg"
 
 // const clientID = "37ff2a2a358a41f7bf29cb92dde7dc78"
 const AUTH_URL =
-  "https://accounts.spotify.com/authorize?client_id=37ff2a2a358a41f7bf29cb92dde7dc78&response_type=code&redirect_uri=http://localhost:8080&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20user-top-read%20user-follow-read%20playlist-read-private"
+  "https://accounts.spotify.com/authorize?client_id=37ff2a2a358a41f7bf29cb92dde7dc78&response_type=code&redirect_uri=http://localhost:8080&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20user-top-read%20user-follow-read%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-read-currently-playing"
 
 export default function Login() {
   return (
-    <div style={{"backgroundColor": "lightblue"}}>
+    <div style={{"backgroundColor": "lightblue", height: "100vh"}}>
       <h1 
         className="d-flex justify-content-center"
         style={{}}
@@ -28,7 +27,7 @@ export default function Login() {
         Please login with your Spotify account here!
         </a>
       </Container>
-      <span style={{"bottom": 0, 'position': 'relative'}}>
+      <span style={{bottom: 0}}>
         {"_ "}
       </span>
     </div>

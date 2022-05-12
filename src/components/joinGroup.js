@@ -9,12 +9,12 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { backendURL, url } from './urls';
+import { backendURL, frontendURL, spotifyURL } from './urls';
 
 export default function JoinGroup({setGroupID}) {
     const [redirectNext, setRedirectNext] = useState(false)
     const [redirectBack, setRedirectBack] = useState(false)
-    var prevPage = "Prev Page"
+    var prevPage = "Previous Page"
 
     const nextRoom = async (e) => {
         e.preventDefault()
@@ -54,12 +54,12 @@ export default function JoinGroup({setGroupID}) {
         return <Redirect to={"/playlist"}/>
     }
     else if(redirectBack){
-        return <Redirect to={"/"}/>
+        return <Redirect to={"/dashboard"}/>
     }
     return (
-        <div className="d-flex flex-column py-2" style={{'textAlign': 'center', 'margin': 'auto', height: "90vh"}}> 
+        <div className="d-flex flex-column py-2" style={{'textAlign': 'center', 'margin': 'auto', height: "90vh", backgroundImage: "url("+frontendURL+'pic4.jpg)'}}> 
             <h1> Join Code Room</h1>
-            <p style={{'marginTop': "10%"}}> <b> Please enter your group code. 
+            <p style={{'marginTop': "5%"}}> <b> Please enter your group code. 
                 You should've gotten this from the group leader
                 <br/>
                 If no one has created a group yet, hit the "{prevPage}" button below  </b>
@@ -67,8 +67,7 @@ export default function JoinGroup({setGroupID}) {
             <div>
                 <input id="input2" style={{'marginTop': "5%"}}/> <button onClick={nextRoom}> Submit</button>  <br/>
 
-                <button style={{'marginRight': "5%", 'marginTop': "18%",  'marginBottom': "1%" }} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
-                <button style={{'marginLeft': "5%", 'marginTop': "18%", 'marginBottom': "1%"}} className="btn btn-success btn-lg" onClick={nextRoom}> Next Page </button>
+                <button style={{'marginTop': "24%",  'marginBottom': "1%" }} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
             </div>
             <div>
                 
