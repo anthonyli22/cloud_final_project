@@ -14,18 +14,34 @@ import { backendURL, url } from './urls';
 
 const socket = io.connect(backendURL);
 
-export default function WaitingRoom({leader, groupID}) {
+export default function WaitingRoom({leader, groupID, changeSong, accessToken, userData}) {
     const [startMusic, setStartMusic] = useState(false)
 
-    const start = () => {
-        socket.emit("button_pressed", {groupID} )
-        console.log("set musics to trueeee21321321", {groupID})
+    const start =  async () => {
+        await axios.post(backendURL+"createGroupPlaylist", {
+            "group_id":groupID,
+            "accessToken": accessToken,
+            "userID": userData.id
+        })
+        .then((recList) => {
+            console.log("recList: ", recList)
+            const recListData = recList.data["recList"]
+            changeSong(recList.data["recList"])
+            socket.emit("button_pressed", {groupID, recListData} )
+            console.log("set musics to trueeee21321321", {groupID})
+        })
+        .catch((err) => {
+            console.log("start err: ", err)
+        })
         setStartMusic(true)
+        
     }
 
     useEffect(() => {
         socket.on("receive_pressed", (data) => {
             console.log("set musics to trueeee")
+            console.log("list data line 41: ", data)
+            changeSong(data["recList"])
             setStartMusic(true)
         })
     })
@@ -38,7 +54,7 @@ export default function WaitingRoom({leader, groupID}) {
         return <Redirect to={'/listeningRoom'} />
     }
     return (
-        <div style={{'textAlign': 'center', 'margin': 'auto'}}> 
+        <div style={{'textAlign': 'center', 'margin': 'auto', height: "90vh"}}> 
             {leader === false && <h1 style={{'textAlign': 'center'}}> Waiting for group leader to start...</h1>}
             {leader === true && 
                 <div >

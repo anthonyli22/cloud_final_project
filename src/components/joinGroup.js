@@ -57,18 +57,18 @@ export default function JoinGroup({setGroupID}) {
         return <Redirect to={"/"}/>
     }
     return (
-        <div style={{'textAlign': 'center', 'margin': 'auto'}}> 
+        <div className="d-flex flex-column py-2" style={{'textAlign': 'center', 'margin': 'auto', height: "90vh"}}> 
             <h1> Join Code Room</h1>
-            <p style={{'marginTop': "10%"}}> Please enter your group code. 
+            <p style={{'marginTop': "10%"}}> <b> Please enter your group code. 
                 You should've gotten this from the group leader
                 <br/>
-                If no one has created a group yet, hit the "{prevPage}" button below 
+                If no one has created a group yet, hit the "{prevPage}" button below  </b>
             </p>
             <div>
                 <input id="input2" style={{'marginTop': "5%"}}/> <button onClick={nextRoom}> Submit</button>  <br/>
 
-                <button style={{'marginRight': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
-                <button style={{'marginLeft': "5%", 'marginTop': "10%"}} className="btn btn-success btn-lg" onClick={nextRoom}> Next Page </button>
+                <button style={{'marginRight': "5%", 'marginTop': "18%",  'marginBottom': "1%" }} className="btn btn-success btn-lg" onClick={prevRoom}> {prevPage} </button>
+                <button style={{'marginLeft': "5%", 'marginTop': "18%", 'marginBottom': "1%"}} className="btn btn-success btn-lg" onClick={nextRoom}> Next Page </button>
             </div>
             <div>
                 

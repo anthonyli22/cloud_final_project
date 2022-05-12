@@ -21,6 +21,7 @@ export default function Main({ code }) {
   const [leader, setLeader] = useState(false)
   const [playlist, setPlaylist] = useState([])
   const [groupID, setID] = useState(0)
+  const [userData, setUserData] = useState()
 
   useEffect(() => {
     if (!accessToken) return
@@ -77,7 +78,7 @@ export default function Main({ code }) {
   }
 
   return ( 
-      <div style={{'height': '100%'}}>
+      <div style={{'height': '100vh'}}>
         <Header> </Header>
         <Router>
             <Route path='/'
@@ -86,6 +87,7 @@ export default function Main({ code }) {
                   changeLeader={leaderStatus} 
                   accessToken={accessToken}
                   setGroupID={setGroupID}
+                  setMyData={setUserData}
                   />
               </>)}
             />
@@ -110,6 +112,9 @@ export default function Main({ code }) {
                   leader={leader} 
                   playlist={playlist}
                   groupID={groupID}
+                  changeSong={changePlaylist} 
+                  accessToken={accessToken}
+                  userData={userData}
                   /> 
               </>)}
             />

@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { backendURL, spotifyURL } from "./urls"
 
 
-export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
+export default function Dashboard({ changeLeader, accessToken, setGroupID, setMyData }) {
   const [userData, setUserData] = useState({})
   const [redirectCreate, setRedirectCreate] = useState(false)
   const [redirectJoin, setRedirectJoin] = useState(false)
@@ -30,6 +30,7 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
     .then((resp) => {
       console.log("get me: ", resp)
       setUserData(resp.data)
+      setMyData(resp.data)
     })
     .catch((e) => {
       console.log("error me: ", e)
@@ -85,13 +86,16 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID }) {
     return <Redirect to={"/joinGroup"}/>
   }
   return (
-    <Container className="d-flex flex-column py-2" style={{ height: "100vh" }}>
-      <button className="btn btn-success btn-lg" onClick={createGroup}>
-        Create a Party group!
-      </button>
-      <button className="btn btn-success btn-lg" onClick={setLeader}>
-        Join a Party group!
-      </button>
-    </Container>
+    <div style={{"position": "50%"}}>
+      <p> {"_"}</p>
+      <Container className="d-flex flex-column py-2" style={{ height: "85vh" }}>
+        <button className="btn btn-success btn-lg" onClick={createGroup}>
+          Create a Party group!
+        </button>
+        <button className="btn btn-success btn-lg" onClick={setLeader}>
+          Join a Party group!
+        </button>
+      </Container>
+    </div>
   )
 }

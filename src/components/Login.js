@@ -8,27 +8,28 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <div style={{'backgroundImage': img1, "backgroundColor": "orange"}}>
+    <div style={{"backgroundColor": "lightblue"}}>
       <h1 
         className="d-flex justify-content-center"
-        style={{'marginTop': "15px"}}
+        style={{}}
       > 
       Who Got the Aux!? </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
-        <p> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </p>
-        <p> Then our custom algorithm will rank these songs and play them in order to ensure optimal enjoyment! </p>
+        <h5> <b> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </b> </h5>
+        <h5> Then our custom algorithm will rank these songs and play them in order to ensure optimal enjoyment! </h5>
       </span>
       <br/><br/><br/><br/><br/><br/>
       <Container
         className="d-flex justify-content-center align-items-center"
+        style={{"marginBottom": "25%"}}
       >
         <a className="btn btn-success btn-lg" href={AUTH_URL}>
         Please login with your Spotify account here!
         </a>
       </Container>
-      <span>
-
+      <span style={{"bottom": 0, 'position': 'relative'}}>
+        {"_ "}
       </span>
     </div>
   )

@@ -1,9 +1,9 @@
 import React from "react"
 import { backendURL, frontendURL } from "./urls"
-export default function TrackSearchResult({ playlist, selectPlaylist }) {
+export default function TrackSearchResult({ songs, selectPlaylist }) {
   // console.log("list1: ", playlist.images)
   function handlePlay() {
-    selectPlaylist(playlist)
+    selectPlaylist(songs)
   }
 
   return (
@@ -12,10 +12,11 @@ export default function TrackSearchResult({ playlist, selectPlaylist }) {
       style={{ cursor: "pointer", 'alignContent': 'center' }}
       onClick={handlePlay}
     >
-      <img alt="No Pic" src={playlist.images.length !== 0  ? playlist.images[0].url : frontendURL+"frontPage.jpg"} style={{ height: "64px", width: "64px" }} />
+      <img alt="No Pic" src={songs.album.images.length !== 0  ? songs.album.images[0].url : frontendURL+"frontPage.jpg"} style={{ height: "64px", width: "64px" }} />
       <div className="ml-3">
-        <div>{playlist.name}</div>
-        <div className="text-muted">{playlist.description}</div>
+        <div>{songs.name}</div>
+        <div>{songs.artists[0].name}</div>
+        <div className="text-muted">{songs.preview_url}</div>
       </div>
     </div>
   )

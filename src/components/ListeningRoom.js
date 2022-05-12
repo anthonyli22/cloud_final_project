@@ -15,9 +15,14 @@ export default function ListeningRoom({accessToken, playingTrack}) {
     // console.log("playing: ", playingTrack)
     return (
         <div style={{'textAlign': 'center'}}> 
-            <p> Listening!!!</p>
+            <p style={{marginBottom: "40%"}}> {"_"}</p>
+            <span>
+                <button style={{marginRight: "50px"}}> money</button>
+                <button> tye</button>
+            </span>
+            <p style={{bottom: 0}}> Listening!!!</p>
             <div>
-                <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+                <Player accessToken={accessToken} trackUri={playingTrack} />
             </div>
         </div>
     )  
