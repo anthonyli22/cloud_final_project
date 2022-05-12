@@ -40,7 +40,6 @@ export default function WaitingRoom({leader, groupID, changeSong, accessToken, u
 
     useEffect(() => {
         socket.on("receive_pressed", (data) => {
-            console.log("set musics to trueeee")
             console.log("list data line 41: ", data)
             changeSong(data["recList"])
             setStartMusic(true)

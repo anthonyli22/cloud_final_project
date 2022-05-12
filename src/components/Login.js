@@ -1,5 +1,7 @@
 import React from "react"
 import { Container } from "react-bootstrap"
+import { backendURL, frontendURL, spotifyURL } from "./urls";
+
 
 // const clientID = "37ff2a2a358a41f7bf29cb92dde7dc78"
 const AUTH_URL =
@@ -7,15 +9,15 @@ const AUTH_URL =
 
 export default function Login() {
   return (
-    <div style={{"backgroundColor": "lightblue", height: "100vh"}}>
+    <div style={{backgroundImage: "url("+frontendURL+'arcane.png)', height: "100vh", color: "white"}}>
       <h1 
         className="d-flex justify-content-center"
-        style={{}}
+        style={{paddingTop: "40px", "fontFamily": 'Courier New', fontSize: "100px"}}
       > 
       Who Got the Aux!? </h1>
       <br/><br/><br/><br/><br/><br/>
       <span className="justify-content-center" style={{'textAlign': 'center'}}>
-        <h5> <b> Party city is a web application where you can create a group playlist of music using existing playlists that each user already has. </b> </h5>
+        <h5> <b style={{fontSize: "25px"}}> Who Got the Aux!? </b> is a web application where you can create a group playlist of music using existing playlists that each user already has. </h5>
         <h5> Then our custom algorithm will rank these songs and play them in order to ensure optimal enjoyment! </h5>
       </span>
       <br/><br/><br/><br/><br/><br/>
