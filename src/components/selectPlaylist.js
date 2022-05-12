@@ -81,7 +81,7 @@ export default function SelectPlaylist({ leader, accessToken, changePlaylist, gr
     else {
         return (
             
-            <div style={{'textAlign': 'center', 'margin': 'auto', 'alignContent': 'center', height: "90vh", backgroundImage: "url("+frontendURL+'pic3.png)'}}> 
+            <div style={{'textAlign': 'center', 'margin': 'auto', 'alignContent': 'center', height: "90vh", backgroundImage: "url("+frontendURL+'pic7.jpeg)'}}> 
                 <h1> Select Song</h1>
 
                 <p> <b> Your Key: {groupID} </b> </p>

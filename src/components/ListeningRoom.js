@@ -9,10 +9,13 @@ import requests from "requests"
 import { Button } from "bootstrap"
 import Alert from 'sweetalert2';
 import { Redirect, Link, useHistory } from 'react-router-dom';
-import { backendURL, frontendURL, spotifyURL } from "./urls"
+import io from 'socket.io-client'
 
+import { backendURL, frontendURL, spotifyURL } from "./urls";
 
-export default function ListeningRoom({accessToken, playingTrack}) {
+const socket = io.connect(backendURL);
+
+export default function ListeningRoom({accessToken, playingTrack, groupID, leader}) {
     // console.log("playing: ", playingTrack)
     return (
         <div 
@@ -25,7 +28,12 @@ export default function ListeningRoom({accessToken, playingTrack}) {
             </span> */}
             {/* <p style={{bottom: 0, backgroundColor: "white"}}> Listening!!!</p> */}
             <div>
-                <Player accessToken={accessToken} trackUri={playingTrack} />
+                <Player 
+                    accessToken={accessToken} 
+                    trackUri={playingTrack} 
+                    groupID={groupID}
+                    leader={leader}
+                />
             </div>
         </div>
     )  

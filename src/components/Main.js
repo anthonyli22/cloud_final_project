@@ -99,7 +99,12 @@ export default function Main({ code }) {
             />
             <Route path={'/listeningRoom'}
                 render={(props) => (<>
-                  <ListeningRoom accessToken={accessToken} playingTrack={playlist}/>
+                  <ListeningRoom 
+                    accessToken={accessToken} 
+                    playingTrack={playlist}
+                    groupID={groupID}
+                    leader={leader}
+                  />
                 </>)}
             />
             <Route path="/playlist"
