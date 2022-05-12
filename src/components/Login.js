@@ -2,6 +2,45 @@ import React from "react"
 import { Container } from "react-bootstrap"
 import { backendURL, frontendURL, spotifyURL } from "./urls";
 
+// Import the functions you need from the SDKs you need
+
+import { initializeApp } from "firebase/app";
+
+import { getAnalytics } from "firebase/analytics";
+
+// TODO: Add SDKs for Firebase products that you want to use
+
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAD1pFbfWNlM2MzF-NbzFl5Ef43wFfRrrY",
+
+  authDomain: "cloudfront-bf47f.firebaseapp.com",
+
+  projectId: "cloudfront-bf47f",
+
+  storageBucket: "cloudfront-bf47f.appspot.com",
+
+  messagingSenderId: "542376561364",
+
+  appId: "1:542376561364:web:1a241ada6b1ebc7ec54941",
+
+  measurementId: "G-W5JGVZJ3NT"
+
+};
+
+
+// Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
 
 // const clientID = "37ff2a2a358a41f7bf29cb92dde7dc78"
 const AUTH_URL =
