@@ -57,7 +57,7 @@ export default function JoinGroup({setGroupID}) {
         return <Redirect to={"/dashboard"}/>
     }
     return (
-        <div className="d-flex flex-column py-2" style={{'textAlign': 'center', 'margin': 'auto', height: "90vh", backgroundImage: "url("+frontendURL+'pic4.jpg)'}}> 
+        <div className="d-flex flex-column py-2" style={{'textAlign': 'center', 'margin': 'auto', height: "100vh", backgroundImage: "url("+frontendURL+'pic4.jpg)'}}> 
             <h1> Join Code Room</h1>
             <p style={{'marginTop': "5%"}}> <b> Please enter your group code. 
                 You should've gotten this from the group leader

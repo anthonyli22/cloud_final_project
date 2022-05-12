@@ -19,15 +19,15 @@ export default function ListeningRoom({accessToken, playingTrack, groupID, leade
     // console.log("playing: ", playingTrack)
     return (
         <div 
-            style={{'textAlign': 'center', backgroundImage: "url("+frontendURL+'pic6.jpg)'}}
+            style={{height: "100vh", 'textAlign': 'center', backgroundImage: "url("+frontendURL+'pic6.jpg)'}}
         > 
-            <h1 style={{marginBottom: "40%", color: "white", backgroundColor: "black"}}> {"The Listening Room"}</h1>
+            <h1 style={{marginBottom: "45.7%", color: "white", backgroundColor: "black"}}> {"The Listening Room"}</h1>
             {/* <span>
                 <button style={{marginRight: "50px"}}> money</button>
                 <button> tye</button>
             </span> */}
             {/* <p style={{bottom: 0, backgroundColor: "white"}}> Listening!!!</p> */}
-            <div>
+            <div style={{bottom: 0}}>
                 <Player 
                     accessToken={accessToken} 
                     trackUri={playingTrack} 

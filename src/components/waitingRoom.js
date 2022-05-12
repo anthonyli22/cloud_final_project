@@ -54,7 +54,7 @@ export default function WaitingRoom({leader, groupID, changeSong, accessToken, u
         return <Redirect to={'/listeningRoom'} />
     }
     return (
-        <div style={{'textAlign': 'center', 'margin': 'auto', height: "90vh", backgroundImage: "url("+frontendURL+'pic5.jpg)'}}> 
+        <div style={{'textAlign': 'center', 'margin': 'auto', height: "100vh", backgroundImage: "url("+frontendURL+'pic5.jpg)'}}> 
             {leader === false && <h1 style={{'textAlign': 'center', color: "white"}}> Waiting for group leader to start...</h1>}
             {leader === true && 
                 <div style={{color: "white"}} >

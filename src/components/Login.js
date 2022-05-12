@@ -29,9 +29,6 @@ export default function Login() {
         Please login with your Spotify account here!
         </a>
       </Container>
-      <span style={{bottom: 0}}>
-        {"_ "}
-      </span>
     </div>
   )
 }

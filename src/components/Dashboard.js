@@ -86,9 +86,9 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID, setMy
     return <Redirect to={"/joinGroup"}/>
   }
   return (
-    <div style={{"position": "50%", backgroundImage: "url("+frontendURL+'pic1.jpg)'}}>
+    <div style={{height: "100vh", "position": "50%", backgroundImage: "url("+frontendURL+'pic1.jpg)'}}>
       <h1  style={{alignContent: "center", textAlign: "center", color: "white", backgroundColor: "black", padding: "0px"}}> The Aux Dashboard Page </h1>
-      <Container className="d-flex flex-column py-2" style={{ height: "55vh", marginTop: "15%" }}>
+      <Container className="d-flex flex-column py-2" style={{marginTop: "15%" }}>
         <button className="btn btn-success btn-lg" onClick={createGroup} style={{marginBottom: "1%"}}>
           Create a Party group!
         </button>

@@ -61,13 +61,13 @@ export default function Main({ code }) {
       <h1
         style={{
           marginBottom: '7px',
-          marginLeft: '2%',
+          marginLeft: '-5%',
           marginTop: '7px',
           fontFamily: 'Arya',
           fontWeight: '450'
         }}
       >
-        {"."}
+        {"`  "}
       </h1>
     </header>
     )
@@ -75,7 +75,7 @@ export default function Main({ code }) {
 
   return ( 
       <div style={{'height': '100vh'}}>
-        <Header> </Header>
+        {/* <Header> </Header> */}
         <Router>
             <Route path='/'
               render={(props) => (<>
@@ -155,5 +155,6 @@ const styles = {
   'position': 'relative',
   'bottom': 0,
   'backgroundColor': "lightblue",
-  "height": "5vh"
+  "height": "5vh",
+  "fontFamily": "Lucida Handwriting"
 }
