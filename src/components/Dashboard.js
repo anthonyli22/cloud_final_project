@@ -39,7 +39,7 @@ export default function Dashboard({ changeLeader, accessToken, setGroupID, setMy
 
   useEffect(() => {
     getID()
-  }, [accessToken])
+  })
 
   const createGroup = (e) => {
     e.preventDefault()
