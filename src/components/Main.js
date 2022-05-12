@@ -13,7 +13,7 @@ import ListeningRoom from "./ListeningRoom"
 import { backendURL, url } from './urls';
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: "37ff2a2a358a41f7bf29cb92dde7dc78",
+  clientId: "322ee9f88e3444a5b9e205d03139b939",
 })
 
 export default function Main({ code }) {
