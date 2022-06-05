@@ -6,7 +6,7 @@ import { backendURL, frontendURL, spotifyURL } from "./urls";
 
 // const clientID = "37ff2a2a358a41f7bf29cb92dde7dc78"
 const AUTH_URL =
-  "https://accounts.spotify.com/authorize?client_id=322ee9f88e3444a5b9e205d03139b939&response_type=code&redirect_uri=https://spotifyrecs.netlify.app&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20user-top-read%20user-follow-read%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-read-currently-playing"
+  "https://accounts.spotify.com/authorize?client_id=322ee9f88e3444a5b9e205d03139b939&response_type=code&redirect_uri=https://spotifyrecs.netlify.app/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20user-top-read%20user-follow-read%20playlist-read-private%20playlist-modify-private%20playlist-modify-public%20playlist-read-collaborative%20user-read-currently-playing"
 
 export default function Login() {
   return (
